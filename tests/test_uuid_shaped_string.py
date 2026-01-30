@@ -5,7 +5,7 @@ from uuid import uuid4
 from pydantic import BaseModel
 from pydantic import ValidationError
 
-from uuid_shaped_string.uuid_shaped_string import UUIDShapedString
+from uuid_shaped_string import UUIDShapedString
 
 
 class TestUUIDShapedStringBasic(unittest.TestCase):
