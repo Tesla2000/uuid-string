@@ -209,6 +209,161 @@ class TestUUIDShapedStringPydantic(unittest.TestCase):
         self.assertIsInstance(model.mapping["key"], UUIDShapedString)
 
 
+class TestUUIDShapedStringProperties(unittest.TestCase):
+    def test_bytes_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.bytes, uuid_obj.bytes)
+        self.assertIsInstance(uuid_shaped.bytes, bytes)
+        self.assertEqual(len(uuid_shaped.bytes), 16)
+
+    def test_bytes_le_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.bytes_le, uuid_obj.bytes_le)
+        self.assertIsInstance(uuid_shaped.bytes_le, bytes)
+
+    def test_fields_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.fields, uuid_obj.fields)
+        self.assertIsInstance(uuid_shaped.fields, tuple)
+        self.assertEqual(len(uuid_shaped.fields), 6)
+
+    def test_time_low_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.time_low, uuid_obj.time_low)
+        self.assertIsInstance(uuid_shaped.time_low, int)
+
+    def test_time_mid_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.time_mid, uuid_obj.time_mid)
+        self.assertIsInstance(uuid_shaped.time_mid, int)
+
+    def test_time_hi_version_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.time_hi_version, uuid_obj.time_hi_version)
+        self.assertIsInstance(uuid_shaped.time_hi_version, int)
+
+    def test_clock_seq_hi_variant_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(
+            uuid_shaped.clock_seq_hi_variant, uuid_obj.clock_seq_hi_variant
+        )
+        self.assertIsInstance(uuid_shaped.clock_seq_hi_variant, int)
+
+    def test_clock_seq_low_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.clock_seq_low, uuid_obj.clock_seq_low)
+        self.assertIsInstance(uuid_shaped.clock_seq_low, int)
+
+    def test_time_property(self) -> None:
+        uuid_str = "550e8400-e29b-11d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.time, uuid_obj.time)
+        self.assertIsInstance(uuid_shaped.time, int)
+
+    def test_clock_seq_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.clock_seq, uuid_obj.clock_seq)
+        self.assertIsInstance(uuid_shaped.clock_seq, int)
+
+    def test_node_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.node, uuid_obj.node)
+        self.assertIsInstance(uuid_shaped.node, int)
+
+    def test_hex_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.hex, uuid_obj.hex)
+        self.assertIsInstance(uuid_shaped.hex, str)
+        self.assertNotIn("-", uuid_shaped.hex)
+
+    def test_urn_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.urn, uuid_obj.urn)
+        self.assertIsInstance(uuid_shaped.urn, str)
+        self.assertTrue(uuid_shaped.urn.startswith("urn:uuid:"))
+
+    def test_variant_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.variant, uuid_obj.variant)
+
+    def test_version_property(self) -> None:
+        uuid_v4_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_v4_str)
+        uuid_obj = UUID(uuid_v4_str)
+        self.assertEqual(uuid_shaped.version, uuid_obj.version)
+        self.assertEqual(uuid_shaped.version, 4)
+
+    def test_version_property_v1(self) -> None:
+        uuid_v1_str = "550e8400-e29b-11d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_v1_str)
+        self.assertEqual(uuid_shaped.version, 1)
+
+    def test_is_safe_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.is_safe, uuid_obj.is_safe)
+
+    def test_int_property(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(uuid_shaped.int, uuid_obj.int)
+        self.assertIsInstance(uuid_shaped.int, int)
+        self.assertGreater(uuid_shaped.int, 0)
+
+    def test_int_dunder_method(self) -> None:
+        uuid_str = "550e8400-e29b-41d4-a716-446655440000"
+        uuid_shaped = UUIDShapedString(uuid_str)
+        uuid_obj = UUID(uuid_str)
+        self.assertEqual(int(uuid_shaped), int(uuid_obj))
+        self.assertEqual(int(uuid_shaped), uuid_shaped.int)
+
+    def test_properties_with_random_uuid(self) -> None:
+        uuid_obj = uuid4()
+        uuid_shaped = UUIDShapedString(uuid_obj)
+        self.assertEqual(uuid_shaped.bytes, uuid_obj.bytes)
+        self.assertEqual(uuid_shaped.hex, uuid_obj.hex)
+        self.assertEqual(uuid_shaped.int, uuid_obj.int)
+        self.assertEqual(uuid_shaped.version, uuid_obj.version)
+        self.assertEqual(uuid_shaped.variant, uuid_obj.variant)
+
+    def test_properties_with_nil_uuid(self) -> None:
+        nil_uuid = "00000000-0000-0000-0000-000000000000"
+        uuid_shaped = UUIDShapedString(nil_uuid)
+        uuid_obj = UUID(nil_uuid)
+        self.assertEqual(uuid_shaped.int, 0)
+        self.assertEqual(uuid_shaped.bytes, uuid_obj.bytes)
+        self.assertEqual(uuid_shaped.hex, "00000000000000000000000000000000")
+
+
 class TestUUIDShapedStringEdgeCases(unittest.TestCase):
     def test_nil_uuid(self) -> None:
         nil_uuid = "00000000-0000-0000-0000-000000000000"
