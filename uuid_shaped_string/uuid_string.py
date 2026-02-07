@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 bytes_, int_ = bytes, int
 
 
-class UUIDShapedString(str):
+class UUIDString(str):
     def __new__(cls, *args, **kwargs):
         if not args:
             UUID("")
