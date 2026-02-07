@@ -1,3 +1,4 @@
+from typing import Optional
 from typing import TYPE_CHECKING
 from uuid import SafeUUID
 from uuid import UUID
@@ -78,7 +79,7 @@ class UUIDString(str):
         return self._uuid.variant
 
     @property
-    def version(self) -> int | None:
+    def version(self) -> Optional[int]:
         return self._uuid.version
 
     @property
