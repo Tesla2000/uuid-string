@@ -1,4 +1,5 @@
 import unittest
+from typing import Optional
 from uuid import UUID
 from uuid import uuid4
 
@@ -151,7 +152,7 @@ class TestUUIDShapedStringPydantic(unittest.TestCase):
 
     def test_optional_field(self) -> None:
         class Model(BaseModel):
-            id: UUIDString | None = None
+            id: Optional[UUIDString] = None
 
         model_with_value = Model(id="550e8400-e29b-41d4-a716-446655440000")
         model_without_value = Model()
