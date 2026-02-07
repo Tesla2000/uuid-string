@@ -2,8 +2,7 @@ from unittest import TestCase
 
 
 class TestImport(TestCase):
-    @staticmethod
-    def test_import():
+    def test_import(self):
         import uuid_shaped_string
 
         _ = uuid_shaped_string
