@@ -1,8 +1,5 @@
-from unittest import TestCase
+import uuid_string
 
 
-class TestImport(TestCase):
-    def test_import(self):
-        import uuid_string
-
-        _ = uuid_string
+def test_import() -> None:
+    _ = uuid_string
