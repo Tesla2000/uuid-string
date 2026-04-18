@@ -5,7 +5,9 @@ description = "String in UUID format"
 authors = [{name = "Tesla2000", email = "fratajczak124@gmail.com"}]
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = []
+dependencies = [
+    "typing_extensions>=4.0; python_version < '3.10'",
+]
 
 [build-system]
 requires = ["hatchling"]
