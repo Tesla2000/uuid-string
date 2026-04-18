@@ -3,13 +3,14 @@ from typing import TYPE_CHECKING
 from uuid import SafeUUID
 from uuid import UUID
 
+from typing_extensions import Self
+
 if TYPE_CHECKING:
     from pydantic_core import core_schema
-bytes_, int_ = bytes, int
 
 
 class UUIDString(str):
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls, *args: object, **kwargs: object) -> Self:
         if not args:
             UUID("")
         if isinstance(args[0], UUID):
@@ -23,12 +24,12 @@ class UUIDString(str):
         return UUID(self)
 
     @property
-    def bytes(self) -> bytes:
-        return self._uuid.bytes
+    def bytes_le(self) -> bytes:
+        return self._uuid.bytes_le
 
     @property
-    def bytes_le(self) -> bytes_:
-        return self._uuid.bytes_le
+    def bytes(self) -> bytes:
+        return self._uuid.bytes
 
     @property
     def fields(self) -> tuple[int, int, int, int, int, int]:
@@ -86,20 +87,20 @@ class UUIDString(str):
     def is_safe(self) -> SafeUUID:
         return self._uuid.is_safe
 
+    def __int__(self) -> int:
+        return self._uuid.int
+
     @property
     def int(self) -> int:
         return self._uuid.int
 
-    def __int__(self) -> int_:
-        return self._uuid.int
-
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, _source_type, _handler
+        cls, _source_type: object, _handler: object
     ) -> "core_schema.CoreSchema":
         from pydantic_core import core_schema
 
-        def validate(value):
+        def validate(value: object) -> UUIDString:
             if isinstance(value, UUID):
                 value = str(value)
             return cls(value)
@@ -117,3 +118,8 @@ class UUIDString(str):
                 return_schema=core_schema.str_schema(),
             ),
         )
+
+
+__all__ = [
+    "UUIDString",
+]
