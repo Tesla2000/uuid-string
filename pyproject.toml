@@ -1,6 +1,6 @@
 [project]
 name = "uuid_string"
-version = "0.1.12"
+version = "0.1.13"
 description = "String in UUID format"
 authors = [{name = "Tesla2000", email = "fratajczak124@gmail.com"}]
 readme = "README.md"
